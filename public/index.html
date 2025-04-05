@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awais Karni - Designer | Developer | Tester | Scraper</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563EB',
+                        secondary: '#1E40AF',
+                        dark: '#1F2937',
+                        light: '#F9FAFB',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            border-color: #2563EB;
+        }
+        .transition-all {
+            transition: all 0.3s ease;
+        }
+        .payment-form {
+            display: none;
+        }
+        .active-service {
+            border-color: #2563EB;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        #card-element {
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            background: white;
+        }
+        .StripeElement--focus {
+            border-color: #2563EB;
+            box-shadow: 0 1px 3px 0 rgba(66, 153, 225, 0.5);
+        }
+        .StripeElement--invalid {
+            border-color: #e53e3e;
+        }
+        .StripeElement--webkit-autofill {
+            background-color: #fefde5 !important;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+    <div class="max-w-4xl mx-auto px-4 py-8">
+        <!-- Header Section -->
+        <header class="flex flex-col md:flex-row items-center gap-6 mb-8">
+            <div class="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-lg">
+                <img src="awais.jpeg" alt="Awais Karni" class="w-full h-full object-cover">
+            </div>
+            <div class="text-center md:text-left">
+                <h1 class="text-3xl font-bold text-dark mb-2">Awais Karni</h1>
+                <p class="text-lg text-gray-600 mb-3">Designer | Developer | Tester | Scraper</p>
+                <p class="text-gray-700 mb-4 max-w-lg">Hey there! If you've got an idea, I've got the skills to make it come to life.</p>
+                <div class="flex justify-center md:justify-start gap-3">
+                    <a href="https://www.linkedin.com/in/awaisqarni/" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                        LinkedIn
+                    </a>
+                    <a href="mailto:hereyouth@gmail.com" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        Email Me
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Services Section -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-dark mb-6 text-center">My Services</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Graphic Design -->
+                <div class="service-card bg-white rounded-xl border border-gray-200 p-6 transition-all cursor-pointer" onclick="selectService('design')">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="bg-blue-100 p-3 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-pen-tool"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-dark">Graphic Design</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Your brand is unique, and I'm here to make it stand out. From logos to websites, I create designs that tell your story—and make people go, "Wow!"</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-dark font-bold text-lg">From $199</span>
+                        <button class="text-primary hover:text-secondary font-medium transition-all">View Options</button>
+                    </div>
+                </div>
+
+                <!-- Web Development -->
+                <div class="service-card bg-white rounded-xl border border-gray-200 p-6 transition-all cursor-pointer" onclick="selectService('web')">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="bg-blue-100 p-3 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-code"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-dark">Web Development</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">A website should feel like a smooth ride. I build sites that are fast, easy to use, and look great on any device. Let's make sure your visitors enjoy the experience.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-dark font-bold text-lg">From $499</span>
+                        <button class="text-primary hover:text-secondary font-medium transition-all">View Options</button>
+                    </div>
+                </div>
+
+                <!-- Data Scraping -->
+                <div class="service-card bg-white rounded-xl border border-gray-200 p-6 transition-all cursor-pointer" onclick="selectService('scraping')">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="bg-blue-100 p-3 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-database"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-dark">Data Scraping</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Data is like treasure—you just need the right tools to find it! I use Python, Scrapy, and BeautifulSoup to dig up insights that help you make smarter decisions.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-dark font-bold text-lg">From $299</span>
+                        <button class="text-primary hover:text-secondary font-medium transition-all">View Options</button>
+                    </div>
+                </div>
+
+                <!-- Quality Assurance -->
+                <div class="service-card bg-white rounded-xl border border-gray-200 p-6 transition-all cursor-pointer" onclick="selectService('qa')">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="bg-blue-100 p-3 rounded-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-dark">Quality Assurance</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">I don't just hit "send" and call it a day. I double-check, triple-check, and make sure everything works perfectly. Because you deserve nothing less than awesome.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-dark font-bold text-lg">From $149</span>
+                        <button class="text-primary hover:text-secondary font-medium transition-all">View Options</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Selected Service Details -->
+        <section id="service-details" class="bg-white rounded-xl shadow-sm p-6 mb-8 hidden">
+            <div class="flex justify-between items-center mb-6">
+                <h2 id="service-title" class="text-2xl font-bold text-dark">Service Packages</h2>
+                <button onclick="closeServiceDetails()" class="text-gray-500 hover:text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            
+            <!-- Graphic Design Packages -->
+            <div id="design-details" class="service-option hidden">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Basic Package -->
+                    <div class="border border-gray-200 rounded-lg p-6 hover:border-primary transition-all">
+                        <h3 class="text-xl font-semibold text-dark mb-2">Basic Branding</h3>
+                        <p class="text-gray-600 mb-4">Perfect for startups needing core branding elements</p>
+                        <div class="mb-6">
+                            <span class="text-3xl font-bold text-dark">$199</span>
+                            <span class="text-gray-500">/project</span>
+                        </div>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Logo Design
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Business Card Design
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                2 Revisions
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                3-5 Day Delivery
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                PNG, JPG, PDF Files
+                            </li>
+                        </ul>
+                        <button onclick="showPaymentForm('design-basic')" class="w-full bg-primary hover:bg-secondary text-white py-2 rounded-lg font-medium transition-all">Get Started</button>
+                    </div>
+
+                    <!-- Standard Package -->
+                    <div class="border-2 border-primary rounded-lg p-6 relative">
+                        <div class="absolute top-0 right-0 bg-primary text-white text-xs font-bold px-2 py-1 rounded-bl-lg rounded-tr-lg">POPULAR</div>
+                        <h3 class="text-xl font-semibold text-dark mb-2">Complete Branding</h3>
+                        <p class="text-gray-600 mb-4">Full visual identity for growing businesses</p>
+                        <div class="mb-6">
+                            <span class="text-3xl font-bold text-dark">$499</span>
+                            <span class="text-gray-500">/project</span>
+                        </div>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Logo + Brand Guidelines
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Business Stationery Set
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Social Media Kit
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                5 Revisions
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                5-7 Day Delivery
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                All Source Files
+                            </li>
+                        </ul>
+                        <button onclick="showPaymentForm('design-standard')" class="w-full bg-primary hover:bg-secondary text-white py-2 rounded-lg font-medium transition-all">Get Started</button>
+                    </div>
+
+                    <!-- Premium Package -->
+                    <div class="border border-gray-200 rounded-lg p-6 hover:border-primary transition-all">
+                        <h3 class="text-xl font-semibold text-dark mb-2">Premium Package</h3>
+                        <p class="text-gray-600 mb-4">End-to-end design solutions for established brands</p>
+                        <div class="mb-6">
+                            <span class="text-3xl font-bold text-dark">$999</span>
+                            <span class="text-gray-500">/project</span>
+                        </div>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Complete Brand Identity
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Marketing Materials
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Website Design
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Unlimited Revisions
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                7-10 Day Delivery
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                All Source Files + Copyright
+                            </li>
+                        </ul>
+                        <button onclick="showPaymentForm('design-premium')" class="w-full bg-primary hover:bg-secondary text-white py-2 rounded-lg font-medium transition-all">Get Started</button>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-200 pt-6">
+                    <h3 class="text-lg font-semibold text-dark mb-3">How It Works</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <div class="bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center mb-2">
+                                <span class="text-primary font-bold">1</span>
+                            </div>
+                            <h4 class="font-medium text-dark mb-1">Consultation</h4>
+                            <p class="text-sm text-gray-600">We discuss your brand vision and requirements</p>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <div class="bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center mb-2">
+                                <span class="text-primary font-bold">2</span>
+                            </div>
+                            <h4 class="font-medium text-dark mb-1">Concept Creation</h4>
+                            <p class="text-sm text-gray-600">I develop initial design concepts</p>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <div class="bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center mb-2">
+                                <span class="text-primary font-bold">3</span>
+                            </div>
+                            <h4 class="font-medium text-dark mb-1">Feedback & Revisions</h4>
+                            <p class="text-sm text-gray-600">You provide feedback and I refine the designs</p>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <div class="bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center mb-2">
+                                <span class="text-primary font-bold">4</span>
+                            </div>
+                            <h4 class="font-medium text-dark mb-1">Final Delivery</h4>
+                            <p class="text-sm text-gray-600">You receive all final files and assets</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Web Development Details -->
+            <div id="web-details" class="service-option hidden">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Basic Website -->
+                    <div class="border border-gray-200 rounded-lg p-6 hover:border-primary transition-all">
+                        <h3 class="text-xl font-semibold text-dark mb-2">Basic Website</h3>
+                        <p class="text-gray-600 mb-4">Perfect for small businesses and personal portfolios</p>
+                        <div class="mb-6">
+                            <span class="text-3xl font-bold text-dark">$499</span>
+                            <span class="text-gray-500">/project</span>
+                        </div>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                5-7 Pages Website
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Responsive Design
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Basic SEO Setup
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                2 Revisions
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                7-10 Day Delivery
+                            </li>
+                        </ul>
+                        <button onclick="showPaymentForm('web-basic')" class="w-full bg-primary hover:bg-secondary text-white py-2 rounded-lg font-medium transition-all">Get Started</button>
+                    </div>
+
+                    <!-- E-commerce Website -->
+                    <div class="border-2 border-primary rounded-lg p-6 relative">
+                        <div class="absolute top-0 right-0 bg-primary text-white text-xs font-bold px-2 py-1 rounded-bl-lg rounded-tr-lg">POPULAR</div>
+                        <h3 class="text-xl font-semibold text-dark mb-2">E-commerce Website</h3>
+                        <p class="text-gray-600 mb-4">Complete online store for your business</p>
+                        <div class="mb-6">
+                            <span class="text-3xl font-bold text-dark">$1,499</span>
+                            <span class="text-gray-500">/project</span>
+                        </div>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Product Catalog (up to 50 items)
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Shopping Cart & Checkout
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Payment Gateway Integration
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Admin Dashboard
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                5 Revisions
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                14-21 Day Delivery
+                            </li>
+                        </ul>
+                        <button onclick="showPaymentForm('web-ecommerce')" class="w-full bg-primary hover:bg-secondary text-white py-2 rounded-lg font-medium transition-all">Get Started</button>
+                    </div>
+
+                    <!-- Custom Web App -->
+                    <div class="border border-gray-200 rounded-lg p-6 hover:border-primary transition-all">
+                        <h3 class="text-xl font-semibold text-dark mb-2">Custom Web Application</h3>
+                        <p class="text-gray-600 mb-4">Tailored solution for your specific business needs</p>
+                        <div class="mb-6">
+                            <span class="text-3xl font-bold text-dark">$2,999+</span>
+                            <span class="text-gray-500">/project</span>
+                        </div>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Custom Features Development
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                User Authentication System
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Database Integration
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                API Development
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Unlimited Revisions
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                30+ Day Delivery
+                            </li>
+                        </ul>
+                        <button onclick="showPaymentForm('web-custom')" class="w-full bg-primary hover:bg-secondary text-white py-2 rounded-lg font-medium transition-all">Get Started</button>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-200 pt-6">
+                    <h3 class="text-lg font-semibold text-dark mb-3">Development Process</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <div class="bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center mb-2">
+                                <span class="text-primary font-bold">1</span>
+                            </div>
+                            <h4 class="font-medium text-dark mb-1">Requirement Analysis</h4>
+                            <p class="text-sm text-gray-600">We discuss your project goals and technical needs</p>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <div class="bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center mb-2">
+                                <span class="text-primary font-bold">2</span>
+                            </div>
+                            <h4 class="font-medium text-dark mb-1">Wireframing & Design</h4>
+                            <p class="text-sm text-gray-600">Creating visual blueprints of your website/app</p>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <div class="bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center mb-2">
+                                <span class="text-primary font-bold">3</span>
+                            </div>
+                            <h4 class="font-medium text-dark mb-1">Development</h4>
+                            <p class="text-sm text-gray-600">Building the functional website/application</p>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <div class="bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center mb-2">
+                                <span class="text-primary font-bold">4</span>
+                            </div>
+                            <h4 class="font-medium text-dark mb-1">Testing & Launch</h4>
+                            <p class="text-sm text-gray-600">Quality checks and deployment to production</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Scraping Details -->
+            <div id="scraping-details" class="service-option hidden">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Basic Scraping -->
+                    <div class="border border-gray-200 rounded-lg p-6 hover:border-primary transition-all">
+                        <h3 class="text-xl font-semibold text-dark mb-2">Basic Data Collection</h3>
+                        <p class="text-gray-600 mb-4">Simple data extraction from websites</p>
+                        <div class="mb-6">
+                            <span class="text-3xl font-bold text-dark">$299</span>
+                            <span class="text-gray-500">/project</span>
+                        </div>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Scrape up to 1,000 items
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                5-10 Data Fields per Item
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                CSV/Excel Output
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                1 Source Website
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                3-5 Day Delivery
+                            </li>
+                        </ul>
+                        <button onclick="showPaymentForm('scraping-basic')" class="w-full bg-primary hover:bg-secondary text-white py-2 rounded-lg font-medium transition-all">Get Started</button>
+                    </div>
+
+                    <!-- Advanced Scraping -->
+                    <div class="border-2 border-primary rounded-lg p-6 relative">
+                        <div class="absolute top-0 right-0 bg-primary text-white text-xs font-bold px-2 py-1 rounded-bl-lg rounded-tr-lg">POPULAR</div>
+                        <h3 class="text-xl font-semibold text-dark mb-2">Advanced Data Extraction</h3>
+                        <p class="text-gray-600 mb-4">Complex scraping with data processing</p>
+                        <div class="mb-6">
+                            <span class="text-3xl font-bold text-dark">$799</span>
+                            <span class="text-gray-500">/project</span>
+                        </div>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Scrape up to 10,000 items
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                15-20 Data Fields per Item
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Data Cleaning & Processing
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Up to 3 Source Websites
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                JSON/CSV/Excel Output
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                5-7 Day Delivery
+                            </li>
+                        </ul>
+                        <button onclick="showPaymentForm('scraping-advanced')" class="w-full bg-primary hover:bg-secondary text-white py-2 rounded-lg font-medium transition-all">Get Started</button>
+                    </div>
+
+                    <!-- Custom Scraping Solution -->
+                    <div class="border border-gray-200 rounded-lg p-6 hover:border-primary transition-all">
+                        <h3 class="text-xl font-semibold text-dark mb-2">Custom Scraping Solution</h3>
+                        <p class="text-gray-600 mb-4">Tailored data extraction with API or automation</p>
+                        <div class="mb-6">
+                            <span class="text-3xl font-bold text-dark">$1,499+</span>
+                            <span class="text-gray-500">/project</span>
+                        </div>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Large-scale Data Extraction
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Complex Data Processing
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                API Development
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Scheduled/Recurring Scraping
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Database Integration
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                10-14 Day Delivery
+                            </li>
+                        </ul>
+                        <button onclick="showPaymentForm('scraping-custom')" class="w-full bg-primary hover:bg-secondary text-white py-2 rounded-lg font-medium transition-all">Get Started</button>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-200 pt-6">
+                    <h3 class="text-lg font-semibold text-dark mb-3">Scraping Process</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <div class="bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center mb-2">
+                                <span class="text-primary font-bold">1</span>
+                            </div>
+                            <h4 class="font-medium text-dark mb-1">Target Analysis</h4>
+                            <p class="text-sm text-gray-600">We identify the data sources and structure</p>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <div class="bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center mb-2">
+                                <span class="text-primary font-bold">2</span>
+                            </div>
+                            <h4 class="font-medium text-dark mb-1">Scraper Development</h4>
+                            <p class="text-sm text-gray-600">Building the custom data extraction tool</p>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <div class="bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center mb-2">
+                                <span class="text-primary font-bold">3</span>
+                            </div>
+                            <h4 class="font-medium text-dark mb-1">Data Collection</h4>
+                            <p class="text-sm text-gray-600">Running the scraper to gather your data</p>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <div class="bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center mb-2">
+                                <span class="text-primary font-bold">4</span>
+                            </div>
+                            <h4 class="font-medium text-dark mb-1">Delivery</h4>
+                            <p class="text-sm text-gray-600">Providing clean, structured data in your preferred format</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QA Details -->
+            <div id="qa-details" class="service-option hidden">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Basic Testing -->
+                    <div class="border border-gray-200 rounded-lg p-6 hover:border-primary transition-all">
+                        <h3 class="text-xl font-semibold text-dark mb-2">Basic Testing</h3>
+                        <p class="text-gray-600 mb-4">Essential quality checks for your website/app</p>
+                        <div class="mb-6">
+                            <span class="text-3xl font-bold text-dark">$149</span>
+                            <span class="text-gray-500">/project</span>
+                        </div>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Functional Testing
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Cross-browser Testing
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Basic Usability Testing
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Bug Report Document
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                2-3 Day Delivery
+                            </li>
+                        </ul>
+                        <button onclick="showPaymentForm('qa-basic')" class="w-full bg-primary hover:bg-secondary text-white py-2 rounded-lg font-medium transition-all">Get Started</button>
+                    </div>
+
+                    <!-- Comprehensive QA -->
+                    <div class="border-2 border-primary rounded-lg p-6 relative">
+                        <div class="absolute top-0 right-0 bg-primary text-white text-xs font-bold px-2 py-1 rounded-bl-lg rounded-tr-lg">POPULAR</div>
+                        <h3 class="text-xl font-semibold text-dark mb-2">Comprehensive QA</h3>
+                        <p class="text-gray-600 mb-4">Thorough testing for mission-critical applications</p>
+                        <div class="mb-6">
+                            <span class="text-3xl font-bold text-dark">$499</span>
+                            <span class="text-gray-500">/project</span>
+                        </div>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Functional & Regression Testing
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Cross-browser & Device Testing
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Performance Testing
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Security Testing
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Detailed Test Reports
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                5-7 Day Delivery
+                            </li>
+                        </ul>
+                        <button onclick="showPaymentForm('qa-comprehensive')" class="w-full bg-primary hover:bg-secondary text-white py-2 rounded-lg font-medium transition-all">Get Started</button>
+                    </div>
+
+                    <!-- Ongoing QA Support -->
+                    <div class="border border-gray-200 rounded-lg p-6 hover:border-primary transition-all">
+                        <h3 class="text-xl font-semibold text-dark mb-2">Ongoing QA Support</h3>
+                        <p class="text-gray-600 mb-4">Continuous testing for evolving projects</p>
+                        <div class="mb-6">
+                            <span class="text-3xl font-bold text-dark">$999</span>
+                            <span class="text-gray-500">/month</span>
+                        </div>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Weekly Testing Cycles
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Automated Test Suites
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Regression Testing
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Performance Monitoring
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Priority Bug Fixing
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mr-2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                Monthly Reports
+                            </li>
+                        </ul>
+                        <button onclick="showPaymentForm('qa-ongoing')" class="w-full bg-primary hover:bg-secondary text-white py-2 rounded-lg font-medium transition-all">Get Started</button>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-200 pt-6">
+                    <h3 class="text-lg font-semibold text-dark mb-3">QA Process</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <div class="bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center mb-2">
+                                <span class="text-primary font-bold">1</span>
+                            </div>
+                            <h4 class="font-medium text-dark mb-1">Test Planning</h4>
+                            <p class="text-sm text-gray-600">Creating test cases based on requirements</p>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <div class="bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center mb-2">
+                                <span class="text-primary font-bold">2</span>
+                            </div>
+                            <h4 class="font-medium text-dark mb-1">Test Execution</h4>
+                            <p class="text-sm text-gray-600">Running manual and automated tests</p>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <div class="bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center mb-2">
+                                <span class="text-primary font-bold">3</span>
+                            </div>
+                            <h4 class="font-medium text-dark mb-1">Defect Reporting</h4>
+                            <p class="text-sm text-gray-600">Documenting and prioritizing issues found</p>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <div class="bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center mb-2">
+                                <span class="text-primary font-bold">4</span>
+                            </div>
+                            <h4 class="font-medium text-dark mb-1">Retesting</h4>
+                            <p class="text-sm text-gray-600">Verifying fixes and validating changes</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Payment Form -->
+        <!-- Payment Form -->
+<section id="payment-section" class="bg-white rounded-xl shadow-sm p-6 mb-8 hidden">
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold text-dark">Complete Your Purchase</h2>
+        <button onclick="closePaymentForm()" class="text-gray-500 hover:text-gray-700">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="md:col-span-2">
+            <h3 class="text-lg font-semibold text-dark mb-4">Order Summary</h3>
+            <div id="order-summary" class="bg-gray-50 p-4 rounded-lg mb-6">
+                <!-- Dynamically filled by JavaScript -->
+            </div>
+
+            <h3 class="text-lg font-semibold text-dark mb-4">Payment Information</h3>
+            <form id="payment-form" class="space-y-4">
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                    <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" required>
+                </div>
+                <div>
+                    <label for="cardholder-name" class="block text-sm font-medium text-gray-700 mb-1">Cardholder Name</label>
+                    <input type="text" id="cardholder-name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Card Details</label>
+                    <div id="card-element" class="p-3 border border-gray-300 rounded-lg bg-white">
+                        <!-- Stripe Card Element will be inserted here -->
+                    </div>
+                    <div id="card-errors" role="alert" class="text-red-500 text-sm mt-2"></div>
+                </div>
+                <button id="submit-button" class="w-full bg-primary hover:bg-secondary text-white py-3 rounded-lg font-medium transition-all flex items-center justify-center">
+                    <span id="button-text">Pay </span>
+                    <span id="order-amount" class="ml-1"></span>
+                    <svg id="spinner" class="hidden w-5 h-5 text-white animate-spin ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                </button>
+            </form>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg">
+            <h3 class="text-lg font-semibold text-dark mb-4">What's Included</h3>
+            <ul id="package-features" class="space-y-3 mb-6">
+                <!-- Dynamically filled by JavaScript -->
+            </ul>
+            <div class="border-t border-gray-200 pt-4">
+                <div class="flex justify-between mb-2">
+                    <span class="text-gray-600">Subtotal</span>
+                    <span id="subtotal" class="font-medium">$0.00</span>
+                </div>
+                <div class="flex justify-between mb-2">
+                    <span class="text-gray-600">Tax (10%)</span>
+                    <span id="tax" class="font-medium">$0.00</span>
+                </div>
+                <div class="flex justify-between text-lg font-bold text-dark pt-2 border-t border-gray-200">
+                    <span>Total</span>
+                    <span id="total" class="text-primary">$0.00</span>
+                </div>
+            </div>
+            
+            <!-- Added security badges -->
+            <div class="mt-6 pt-4 border-t border-gray-200">
+                <div class="flex items-center justify-center space-x-4">
+                    <img src="https://www.secretlystore.com/assets/images/stripe-badges/Big/powered_by_stripe.svg" alt="Powered by Stripe" class="h-8">
+                    <div class="flex items-center text-gray-500 text-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                        Secure Payment
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+        <!-- Success Message -->
+        <div id="success-message" class="bg-green-50 border border-green-200 text-green-700 p-6 rounded-lg mb-8 hidden">
+            <div class="flex items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle text-green-500"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                <div>
+                    <h3 class="font-bold text-lg">Payment Successful!</h3>
+                    <p>Thank you for your purchase. I'll contact you within 24 hours to get started.</p>
+                    <p class="mt-2 text-sm">A receipt has been sent to <span id="receipt-email" class="font-medium"></span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cancel Message -->
+        <div id="cancel-message" class="bg-red-50 border border-red-200 text-red-700 p-6 rounded-lg mb-8 hidden">
+            <div class="flex items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle text-red-500"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+                <div>
+                    <h3 class="font-bold text-lg">Payment Canceled</h3>
+                    <p>Your payment was not completed. You can try again anytime.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-12 text-center text-gray-500 text-sm">
+            <p>© 2023 Awais Karni. All rights reserved.</p>
+            <p class="mt-1">Contact: <a href="mailto:hereyouth@gmail.com" class="text-primary hover:underline">hereyouth@gmail.com</a></p>
+        </footer>
+    </div>
+
+    <script>
+let currentPackageId = '';
+let stripe;
+let elements;
+let cardElement;
+
+// Service selection and display logic (unchanged)
+function selectService(service) {
+    document.querySelectorAll('.service-option').forEach(el => {
+        el.classList.add('hidden');
+    });
+    document.getElementById(`${service}-details`).classList.remove('hidden');
+    document.getElementById('service-title').textContent = 
+        service === 'design' ? 'Graphic Design Packages' :
+        service === 'web' ? 'Web Development Packages' :
+        service === 'scraping' ? 'Data Scraping Packages' : 'Quality Assurance Packages';
+    document.getElementById('service-details').classList.remove('hidden');
+    document.getElementById('service-details').scrollIntoView({ behavior: 'smooth' });
+}
+
+function closeServiceDetails() {
+    document.getElementById('service-details').classList.add('hidden');
+}
+
+        // Payment form handling
+        const packages = {
+            // Graphic Design Packages
+            'design-basic': {
+                title: 'Basic Branding Package',
+                price: 199,
+                features: [
+                    'Logo Design',
+                    'Business Card Design',
+                    '2 Revisions',
+                    '3-5 Day Delivery',
+                    'PNG, JPG, PDF Files'
+                ]
+            },
+            'design-standard': {
+                title: 'Complete Branding Package',
+                price: 499,
+                features: [
+                    'Logo + Brand Guidelines',
+                    'Business Stationery Set',
+                    'Social Media Kit',
+                    '5 Revisions',
+                    '5-7 Day Delivery',
+                    'All Source Files'
+                ]
+            },
+            'design-premium': {
+                title: 'Premium Design Package',
+                price: 999,
+                features: [
+                    'Complete Brand Identity',
+                    'Marketing Materials',
+                    'Website Design',
+                    'Unlimited Revisions',
+                    '7-10 Day Delivery',
+                    'All Source Files + Copyright'
+                ]
+            },
+            
+            // Web Development Packages
+            'web-basic': {
+                title: 'Basic Website Package',
+                price: 499,
+                features: [
+                    '5-7 Pages Website',
+                    'Responsive Design',
+                    'Basic SEO Setup',
+                    '2 Revisions',
+                    '7-10 Day Delivery'
+                ]
+            },
+            'web-ecommerce': {
+                title: 'E-commerce Website Package',
+                price: 1499,
+                features: [
+                    'Product Catalog (up to 50 items)',
+                    'Shopping Cart & Checkout',
+                    'Payment Gateway Integration',
+                    'Admin Dashboard',
+                    '5 Revisions',
+                    '14-21 Day Delivery'
+                ]
+            },
+            'web-custom': {
+                title: 'Custom Web Application',
+                price: 2999,
+                features: [
+                    'Custom Features Development',
+                    'User Authentication System',
+                    'Database Integration',
+                    'API Development',
+                    'Unlimited Revisions',
+                    '30+ Day Delivery'
+                ]
+            },
+            
+            // Data Scraping Packages
+            'scraping-basic': {
+                title: 'Basic Data Collection',
+                price: 299,
+                features: [
+                    'Scrape up to 1,000 items',
+                    '5-10 Data Fields per Item',
+                    'CSV/Excel Output',
+                    '1 Source Website',
+                    '3-5 Day Delivery'
+                ]
+            },
+            'scraping-advanced': {
+                title: 'Advanced Data Extraction',
+                price: 799,
+                features: [
+                    'Scrape up to 10,000 items',
+                    '15-20 Data Fields per Item',
+                    'Data Cleaning & Processing',
+                    'Up to 3 Source Websites',
+                    'JSON/CSV/Excel Output',
+                    '5-7 Day Delivery'
+                ]
+            },
+            'scraping-custom': {
+                title: 'Custom Scraping Solution',
+                price: 1499,
+                features: [
+                    'Large-scale Data Extraction',
+                    'Complex Data Processing',
+                    'API Development',
+                    'Scheduled/Recurring Scraping',
+                    'Database Integration',
+                    '10-14 Day Delivery'
+                ]
+            },
+            
+            // Quality Assurance Packages
+            'qa-basic': {
+                title: 'Basic Testing Package',
+                price: 149,
+                features: [
+                    'Functional Testing',
+                    'Cross-browser Testing',
+                    'Basic Usability Testing',
+                    'Bug Report Document',
+                    '2-3 Day Delivery'
+                ]
+            },
+            'qa-comprehensive': {
+                title: 'Comprehensive QA Package',
+                price: 499,
+                features: [
+                    'Functional & Regression Testing',
+                    'Cross-browser & Device Testing',
+                    'Performance Testing',
+                    'Security Testing',
+                    'Detailed Test Reports',
+                    '5-7 Day Delivery'
+                ]
+            },
+            'qa-ongoing': {
+                title: 'Ongoing QA Support',
+                price: 999,
+                features: [
+                    'Weekly Testing Cycles',
+                    'Automated Test Suites',
+                    'Regression Testing',
+                    'Performance Monitoring',
+                    'Priority Bug Fixing',
+                    'Monthly Reports'
+                ]
+            }
+        };
+
+        function showPaymentForm(packageId) {
+    currentPackageId = packageId;
+    const pkg = packages[packageId];
+    
+    // Update order summary
+    document.getElementById('order-summary').innerHTML = `
+        <h4 class="font-semibold text-dark">${pkg.title}</h4>
+        <p class="text-gray-600">$${pkg.price.toFixed(2)}</p>
+    `;
+    
+    // Update package features
+    const featuresList = document.getElementById('package-features');
+    featuresList.innerHTML = '';
+    pkg.features.forEach(feature => {
+        const li = document.createElement('li');
+        li.className = 'flex items-start';
+        li.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check mt-0.5 mr-2 flex-shrink-0"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>${feature}</span>
+        `;
+        featuresList.appendChild(li);
+    });
+    
+    // Update totals
+    const subtotal = pkg.price;
+    const tax = subtotal * 0.1;
+    const total = subtotal + tax;
+    
+    document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+    document.getElementById('tax').textContent = `$${tax.toFixed(2)}`;
+    document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+    document.getElementById('order-amount').textContent = `$${total.toFixed(2)}`;
+    
+    // Show payment form
+    document.getElementById('service-details').classList.add('hidden');
+    document.getElementById('success-message').classList.add('hidden');
+    document.getElementById('cancel-message').classList.add('hidden');
+    document.getElementById('payment-section').classList.remove('hidden');
+    
+    // Initialize Stripe Elements if not already done
+    if (!stripe) {
+        initializeStripe();
+    }
+    
+    // Scroll to payment form
+    document.getElementById('payment-section').scrollIntoView({ behavior: 'smooth' });
+}
+
+function closePaymentForm() {
+    document.getElementById('payment-section').classList.add('hidden');
+}
+
+// Stripe Elements Integration
+function initializeStripe() {
+    stripe = Stripe('pk_test_51RAAX3Rok3kBX0vZefIJHBfUH8Ys7QopeNSJwmGsl9aqWMhN6D2oE41V6CjqDNtQ1bLWH7Qre9H9P9m87zgfUp0O00dvB6evzp');
+    
+    // Set up Elements
+    elements = stripe.elements();
+    
+    // Custom styling for the card element
+    const style = {
+        base: {
+            color: '#32325d',
+            fontFamily: '"Inter", sans-serif',
+            fontSmoothing: 'antialiased',
+            fontSize: '16px',
+            '::placeholder': {
+                color: '#aab7c4'
+            }
+        },
+        invalid: {
+            color: '#e53e3e',
+            iconColor: '#e53e3e'
+        }
+    };
+    
+    // Create and mount the card element
+    cardElement = elements.create('card', { style: style });
+    cardElement.mount('#card-element');
+    
+    // Handle real-time validation errors
+    cardElement.on('change', (event) => {
+        const displayError = document.getElementById('card-errors');
+        displayError.textContent = event.error ? event.error.message : '';
+    });
+    
+    // Handle form submission
+    const form = document.getElementById('payment-form');
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        
+        // Disable form while processing
+        const submitButton = document.getElementById('submit-button');
+        submitButton.disabled = true;
+        document.getElementById('spinner').classList.remove('hidden');
+        document.getElementById('button-text').textContent = 'Processing';
+        
+        const email = document.getElementById('email').value;
+        const pkg = packages[currentPackageId];
+        const total = pkg.price + (pkg.price * 0.1); // Include tax
+        
+        try {
+            // 1. Create Payment Intent on your server
+            const response = await fetch('/create-payment-intent', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    amount: Math.round(total * 100), // in cents
+                    currency: 'usd',
+                    packageId: currentPackageId,
+                    email: email
+                })
+            });
+            
+            const { clientSecret } = await response.json();
+            
+            // 2. Confirm the payment
+            const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+                payment_method: {
+                    card: cardElement,
+                    billing_details: { email: email }
+                }
+            });
+            
+            if (error) {
+                // Show error
+                document.getElementById('card-errors').textContent = error.message;
+                submitButton.disabled = false;
+                document.getElementById('spinner').classList.add('hidden');
+                document.getElementById('button-text').textContent = 'Pay';
+            } else if (paymentIntent.status === 'succeeded') {
+                // Show success
+                document.getElementById('receipt-email').textContent = email;
+                document.getElementById('payment-section').classList.add('hidden');
+                document.getElementById('success-message').classList.remove('hidden');
+                
+                // Optional: Send confirmation to your server
+                await fetch('/payment-success', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        paymentIntentId: paymentIntent.id,
+                        amount: total,
+                        email: email,
+                        package: pkg.title
+                    })
+                });
+            }
+        } catch (err) {
+            console.error('Payment error:', err);
+            document.getElementById('card-errors').textContent = 'Payment failed. Please try again.';
+            submitButton.disabled = false;
+            document.getElementById('spinner').classList.add('hidden');
+            document.getElementById('button-text').textContent = 'Pay';
+        }
+    });
+}
+
+// Initialize page
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('payment-section').classList.add('hidden');
+    document.getElementById('success-message').classList.add('hidden');
+    document.getElementById('cancel-message').classList.add('hidden');
+});
+    </script>
+</body>
+</html>
