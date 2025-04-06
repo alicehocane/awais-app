@@ -1153,7 +1153,7 @@ function initializeStripe() {
             const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
                 payment_method: {
                     card: cardElement,
-                    billing_details: { email: email }
+                    billing_details: { email: email, name: name }
                 }
             });
             
@@ -1177,7 +1177,7 @@ function initializeStripe() {
                         paymentIntentId: paymentIntent.id,
                         amount: total,
                         email: email,
-                        name: cardholder-name,
+                        name: name,
                         package: pkg.title
                     })
                 });
