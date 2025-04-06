@@ -6,9 +6,9 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 // Middleware
 app.use(express.static(path.join(__dirname, "public")));
-app.use(express.json()); // required for Stripe to read JSON body
+app.use(express.json());
 
-// Stripe payment route
+// ✅ Add Stripe payment intent route
 app.post("/create-payment-intent", async (req, res) => {
   const { amount } = req.body;
 
@@ -25,7 +25,7 @@ app.post("/create-payment-intent", async (req, res) => {
   }
 });
 
-// Fallback: serve frontend
+// Fallback to serve frontend
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
@@ -33,5 +33,5 @@ app.get("*", (req, res) => {
 // Start server
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
