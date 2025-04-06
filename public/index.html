@@ -1130,6 +1130,7 @@ function initializeStripe() {
         document.getElementById('button-text').textContent = 'Processing';
         
         const email = document.getElementById('email').value;
+        const name = document.getElementById('cardholder-name').value; 
         const pkg = packages[currentPackageId];
         const total = pkg.price + (pkg.price * 0.1); // Include tax
         
@@ -1142,7 +1143,8 @@ function initializeStripe() {
                     amount: Math.round(total * 100), // in cents
                     currency: 'usd',
                     packageId: currentPackageId,
-                    email: email
+                    email: email,
+                    name: cardholder-name
                 })
             });
             
@@ -1152,7 +1154,7 @@ function initializeStripe() {
             const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
                 payment_method: {
                     card: cardElement,
-                    billing_details: { email: email }
+                    billing_details: { email: email, name: cardholder-name }
                 }
             });
             
@@ -1176,6 +1178,7 @@ function initializeStripe() {
                         paymentIntentId: paymentIntent.id,
                         amount: total,
                         email: email,
+                        name: cardholder-name,
                         package: pkg.title
                     })
                 });
