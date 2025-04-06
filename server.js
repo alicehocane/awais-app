@@ -1,14 +1,15 @@
 require("dotenv").config();
 const express = require("express");
 const path = require("path");
-const app = express();
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+
+const app = express();
 
 // Middleware
 app.use(express.static(path.join(__dirname, "public")));
-app.use(express.json()); // required!
+app.use(express.json());
 
-// Payment Intent route
+// Stripe Payment Intent API route
 app.post("/create-payment-intent", async (req, res) => {
   const { amount } = req.body;
 
@@ -21,18 +22,18 @@ app.post("/create-payment-intent", async (req, res) => {
 
     res.send({ clientSecret: paymentIntent.client_secret });
   } catch (err) {
-    console.error(err);
+    console.error("Stripe Error:", err);
     res.status(500).json({ error: err.message });
   }
 });
 
-// Frontend fallback
+// Fallback for SPA routing
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-// Start server (with fallback)
+// Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`🚀 Server is running on port ${PORT}`);
 });
