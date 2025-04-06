@@ -27,6 +27,21 @@ app.post("/create-payment-intent", async (req, res) => {
   }
 });
 
+// ✅ NEW: Payment success route
+app.post("/payment-success", (req, res) => {
+  const { paymentIntentId, amount, email, name, package: pkg } = req.body;
+
+  console.log("✅ Payment Success Details:", {
+    paymentIntentId,
+    amount,
+    email,
+    name,
+    package: pkg,
+  });
+
+  res.status(200).json({ message: "Payment success received" });
+});
+
 // Fallback for SPA routing
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
