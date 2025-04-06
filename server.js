@@ -11,13 +11,23 @@ app.use(express.json());
 
 // Stripe Payment Intent API route
 app.post("/create-payment-intent", async (req, res) => {
-  const { amount } = req.body;
+  const { amount, email, name, packageId } = req.body;
 
   try {
     const paymentIntent = await stripe.paymentIntents.create({
       amount,
       currency: "usd",
       automatic_payment_methods: { enabled: true },
+
+      // 👇 These lines make the payment descriptive in Stripe
+      description: `Payment for package: ${packageId}`,
+      receipt_email: email,
+      metadata: {
+        customer_name: name,
+        customer_email: email,
+        package_id: packageId,
+        amount: (amount / 100).toFixed(2),
+      }
     });
 
     res.send({ clientSecret: paymentIntent.client_secret });
