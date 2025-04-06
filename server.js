@@ -11,22 +11,29 @@ app.use(express.json());
 
 // Stripe Payment Intent API route
 app.post("/create-payment-intent", async (req, res) => {
-  const { amount, email, name, packageId } = req.body;
+  const { amount, email, name, packageTitle } = req.body;
 
   try {
+    const customer = await stripe.customers.create({
+      name,
+      email,
+      metadata: {
+        package: packageTitle
+      }
+    });
+
     const paymentIntent = await stripe.paymentIntents.create({
       amount,
       currency: "usd",
       automatic_payment_methods: { enabled: true },
-
-      // 👇 These lines make the payment descriptive in Stripe
-      description: `Payment for package: ${packageId}`,
+      customer: customer.id,
+      description: `Payment for package: ${packageTitle}`,
       receipt_email: email,
       metadata: {
         customer_name: name,
         customer_email: email,
-        package_id: packageId,
-        amount: (amount / 100).toFixed(2),
+        package_title: packageTitle,
+        amount_usd: (amount / 100).toFixed(2)
       }
     });
 
@@ -37,11 +44,11 @@ app.post("/create-payment-intent", async (req, res) => {
   }
 });
 
-// ✅ NEW: Payment success route
+// Payment success route
 app.post("/payment-success", (req, res) => {
   const { paymentIntentId, amount, email, name, package: pkg } = req.body;
 
-  console.log("✅ Payment Success Details:", {
+  console.log("Payment Success Details:", {
     paymentIntentId,
     amount,
     email,
@@ -60,5 +67,5 @@ app.get("*", (req, res) => {
 // Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`🚀 Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
