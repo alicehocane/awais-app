@@ -6,9 +6,9 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 // Middleware
 app.use(express.static(path.join(__dirname, "public")));
-app.use(express.json());
+app.use(express.json()); // required!
 
-// ✅ Add Stripe payment intent route
+// Payment Intent route
 app.post("/create-payment-intent", async (req, res) => {
   const { amount } = req.body;
 
@@ -21,17 +21,18 @@ app.post("/create-payment-intent", async (req, res) => {
 
     res.send({ clientSecret: paymentIntent.client_secret });
   } catch (err) {
+    console.error(err);
     res.status(500).json({ error: err.message });
   }
 });
 
-// Fallback to serve frontend
+// Frontend fallback
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-// Start server
-const PORT = process.env.PORT;
+// Start server (with fallback)
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
