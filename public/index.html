@@ -1144,8 +1144,8 @@ function initializeStripe() {
                     amount: Math.round(total * 100), // in cents
                     currency: 'usd',
                     packageId: currentPackageId,
-                    email: email,
-                    name: name
+                    name: name,
+                    email: email
                 })
             });
             
@@ -1155,7 +1155,7 @@ function initializeStripe() {
             const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
                 payment_method: {
                     card: cardElement,
-                    billing_details: { email: email, name: name }
+                    billing_details: { name: name, email: email }
                 }
             });
             
@@ -1178,8 +1178,8 @@ function initializeStripe() {
                     body: JSON.stringify({
                         paymentIntentId: paymentIntent.id,
                         amount: total,
-                        email: email,
                         name: name,
+                        email: email,
                         package: pkg.title
                     })
                 });
