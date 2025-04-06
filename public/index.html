@@ -1143,8 +1143,7 @@ function initializeStripe() {
                     amount: Math.round(total * 100), // in cents
                     currency: 'usd',
                     packageId: currentPackageId,
-                    email: email,
-                    name: cardholder-name
+                    email: email
                 })
             });
             
@@ -1154,7 +1153,7 @@ function initializeStripe() {
             const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
                 payment_method: {
                     card: cardElement,
-                    billing_details: { email: email, name: cardholder-name }
+                    billing_details: { email: email }
                 }
             });
             
