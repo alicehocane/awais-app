@@ -1143,7 +1143,7 @@ function initializeStripe() {
                 body: JSON.stringify({
                     amount: Math.round(total * 100), // in cents
                     currency: 'usd',
-                    packageId: currentPackageId,
+                    packageTitle: pkg.title,
                     name: name,
                     email: email
                 })
